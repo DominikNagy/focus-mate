@@ -31,15 +31,15 @@
     <!-- Custom styles for this template -->
     <link href="vendor/twbs/bootstrap/dist/css/cover.css" rel="stylesheet">
 
+    <!-- Main stylesheet -->
+    <link href="_assets/css/main.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
-
 </head>
 
 <body>
@@ -49,10 +49,11 @@
     <div class="site-wrapper-inner">
 
         <div class="cover-container">
-
+<!--            <h3 class="masthead" id="time"></h3>-->
             <div class="masthead clearfix">
                 <div class="inner">
                     <h3 class="masthead-brand">focus-mate</h3>
+
                     <nav>
                         <ul class="nav masthead-nav">
                             <li class="active"><a href="#">Home</a></li>
@@ -64,32 +65,79 @@
             </div>
 
             <div class="inner cover">
-                <h1 class="cover-heading">Cover your page.</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-                <p class="lead">
-                    <a href="#" class="btn btn-lg btn-default">Learn more</a>
-                </p>
+                <h1 class="cover-heading">Get your brain focusing mate.</h1>
 
                 <audio id="myAudio">
                     <source src="_assets/audio/SampleAudio.mp3" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio><br />
 
-                <button onclick="playAudio()" class="btn btn-success"> play </button>
-                <button onclick="pauseAudio()" class="btn btn-warning"> pause </button>
+                <button onclick="playAudio()" class="btn btn-success" id="playPause"> PLAY </button> <br><br>
+                <input type="range" onchange="setVolume()" id='volume1' min=0 max=1      step=0.01 value='0.339'>
+
+            </div>
+
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object" src="_assets/img/coffee.png" alt="..." width="64" height="64" onclick="playAudio()">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading pull-left">Middle aligned media</h4>
+                    ...
+                </div>
             </div>
             <script>
                 var x = document.getElementById("myAudio");
+                var isPlaying = false;
+                var date = new Date();
 
+                console.log(date);
                 function playAudio() {
-                    x.play();
-                    x.volume = 1;
+                    if(isPlaying === false) {
+                        x.play();
+                        isPlaying = true;
+                        document.getElementById("playPause").innerHTML = "PAUSE";
+                    }
+
+                    else {
+                        x.pause();
+                        isPlaying = false;
+                        document.getElementById("playPause").innerHTML = "PLAY";
+                    }
                 }
 
-                function pauseAudio() {
-                    x.pause();
+                function setVolume() {
+                    var mediaClip = document.getElementById("myAudio");
+                    document.getElementById("myAudio").value = mediaClip;
+                    mediaClip.volume = document.getElementById("volume1").value;
+
                 }
+
+                document.getElementById("date").innerHTML = date.now();
+
             </script>
+
+<!--            <script>-->
+<!--                (function () {-->
+<!--                    function checkTime(i) {-->
+<!--                        return (i < 10) ? "0" + i : i;-->
+<!--                    }-->
+<!---->
+<!--                    function startTime() {-->
+<!--                        var today = new Date(),-->
+<!--                            h = checkTime(today.getHours()),-->
+<!--                            m = checkTime(today.getMinutes()),-->
+<!--                            s = checkTime(today.getSeconds());-->
+<!--                        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;-->
+<!--                        t = setTimeout(function () {-->
+<!--                            startTime()-->
+<!--                        }, 500);-->
+<!--                    }-->
+<!--                    startTime();-->
+<!--                })();-->
+<!--            </script>-->
 
             <div class="mastfoot">
                 <div class="inner">
